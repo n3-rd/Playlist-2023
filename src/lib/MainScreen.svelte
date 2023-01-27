@@ -4,6 +4,7 @@
     import CircleType from "circletype";
     import ColorThief from "colorthief";
     import { Howl, Howler } from "howler";
+    import textfit from "textfit";
     import NextButton from "./NextButton.svelte";
     import PreviousButton from "./PreviousButton.svelte";
     import PlayButton from "./PlayButton.svelte";
@@ -26,12 +27,22 @@
             console.log(e);
         }
     };
+    const setCircleText = () => {
+        new CircleType(circleText);
+        // make the circle text grow to fit the screen
+        circleText.style.fontSize = "clamp(2rem, 6vw, 6rem)";
+    };
     const nextTrack = () => {
         currentTrack =
             currentTrack === playlistData.length - 1 ? 0 : currentTrack + 1;
         // update the current track name
-        circleText.innerHTML = playlistData[currentTrack]?.track?.name;
-        new CircleType(circleText);
+        circleText.innerHTML =
+            playlistData[currentTrack]?.track?.name +
+            " · " +
+            playlistData[currentTrack]?.track?.artists.map(
+                (artist) => artist.name
+            );
+        setCircleText();
         chnageBackground(
             playlistData[currentTrack]?.track?.album?.images[0]?.url
         );
@@ -39,8 +50,13 @@
     const previousTrack = () => {
         currentTrack =
             currentTrack === 0 ? playlistData.length - 1 : currentTrack - 1;
-        circleText.innerHTML = playlistData[currentTrack]?.track?.name;
-        new CircleType(circleText);
+        circleText.innerHTML =
+            playlistData[currentTrack]?.track?.name +
+            " · " +
+            playlistData[currentTrack]?.track?.artists.map(
+                (artist) => artist.name
+            );
+        setCircleText();
         chnageBackground(
             playlistData[currentTrack]?.track?.album?.images[0]?.url
         );
@@ -81,7 +97,8 @@
     onMount(async () => {
         await fetchPlayList();
         console.log("Hello from Svelte!");
-        new CircleType(circleText);
+        textfit(circleText, { minFontSize: 70, maxFontSize: 500 });
+        setCircleText();
         chnageBackground(
             playlistData[currentTrack]?.track?.album?.images[0]?.url
         );
@@ -96,15 +113,23 @@
         <PhoneFrame
             phoneImage={playlistData[currentTrack]?.track?.album?.images[0]
                 ?.url}
+            trackName={playlistData[currentTrack]?.track?.name}
+            artistName={playlistData[currentTrack]?.track?.artists.map(
+                (artist) => artist.name
+            )}
         />
     </div>
 
     <div
-        class="circle-text absolute text-[6rem] serif font-black uppercase"
+        class="circle-text absolute serif font-black uppercase h-screen w-screen flex justify-center items-center text-center"
         style="color: {controlsColor};"
         bind:this={circleText}
     >
-        {playlistData[currentTrack]?.track?.name}
+        {playlistData[currentTrack]?.track?.name} · {" "}
+        <!-- add all artists -->
+        {playlistData[currentTrack]?.track?.artists.map(
+            (artist) => artist.name
+        )}
     </div>
 
     <div class="absolute bottom-8 right-8 flex justify-between items-center">
@@ -128,6 +153,8 @@
 <style>
     .circle-text {
         animation: circle-text 30s infinite;
+
+        /* font-size: clamp(2rem, 6vw, 6rem); */
     }
     @keyframes circle-text {
         0% {
