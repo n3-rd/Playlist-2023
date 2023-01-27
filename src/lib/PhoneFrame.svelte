@@ -19,7 +19,7 @@
         <!-- make an absolute over lay at the bottom for text-->
         <div>
             <div
-                class="absolute bottom-0 h-[20vh] w-full bg-[#111] rounded-b-[4.5vh]"
+                class="absolute bottom-0 h-[20vh] w-full bg-[#111] rounded-b-[4.5vh] px-6"
             >
                 <div class="h-full w-full flex justify-center items-center">
                     <div class="text-center">

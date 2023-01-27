@@ -106,7 +106,7 @@
 </script>
 
 <div
-    class="h-screen w-screen flex justify-center items-center overflow-x-hidden bg-[#3E628E]"
+    class="h-screen w-screen flex justify-center items-center overflow-x-hidden bg-[#3E628E] transition duration-500 linear"
     bind:this={mainScreen}
 >
     <div class="phone-frame z-[999]">
