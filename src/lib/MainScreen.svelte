@@ -1,14 +1,12 @@
 <script>
     import { onMount } from "svelte";
     import PhoneFrame from "./PhoneFrame.svelte";
+    import Controls from "./Controls.svelte";
     import CircleType from "circletype";
     import ColorThief from "colorthief";
     import { Howl, Howler } from "howler";
     import textfit from "textfit";
-    import NextButton from "./NextButton.svelte";
-    import PreviousButton from "./PreviousButton.svelte";
-    import PlayButton from "./PlayButton.svelte";
-    import StopButton from "./StopButton.svelte";
+
     let circleText;
     let mainScreen;
     let playlistData = [];
@@ -133,20 +131,13 @@
     </div>
 
     <div class="absolute bottom-8 right-8 flex justify-between items-center">
-        <button on:click={previousTrack}>
-            <PreviousButton fill={controlsColor} />
-        </button>
-        <button
-            on:click={playSound(playlistData[currentTrack]?.track.preview_url)}
-        >
-            <PlayButton fill={controlsColor} />
-        </button>
-        <button on:click={stopSound}>
-            <StopButton fill={controlsColor} />
-        </button>
-        <button on:click={nextTrack}>
-            <NextButton fill={controlsColor} />
-        </button>
+        <Controls
+            playPreviousTrack={previousTrack}
+            songToPlay={playlistData[currentTrack]?.track.preview_url}
+            stopSoundButton={stopSound}
+            playNextTrack={nextTrack}
+            controlsColorButton={controlsColor}
+        />
     </div>
 </div>
 
