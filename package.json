@@ -1,0 +1,26 @@
+{
+  "name": "spotify-2023-playlist",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^2.0.0",
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "svelte": "^3.54.0",
+    "tailwindcss": "^3.2.4",
+    "vite": "^4.0.0"
+  },
+  "dependencies": {
+    "circletype": "^2.3.0",
+    "colorthief": "^2.3.2",
+    "howler": "^2.2.3",
+    "node-sass": "^8.0.0",
+    "sass": "^1.57.1"
+  }
+}
