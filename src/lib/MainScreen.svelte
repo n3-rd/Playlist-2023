@@ -10,6 +10,12 @@
     let currentTrack = 0;
     let controlsColor = "#fff";
     let loaded = false;
+    const truncateText = (string, length, delimiter) => {
+        delimiter = delimiter;
+        return string.length > length
+            ? string.substr(0, length) + delimiter
+            : string;
+    };
     const fetchPlayList = async () => {
         try {
             const response = await fetch(
@@ -96,8 +102,16 @@
             <PhoneFrame
                 phoneImage={playlistData[currentTrack]?.track?.album?.images[0]
                     ?.url}
-                trackName={playlistData[currentTrack]?.track?.name}
-                artistName={playlistData[currentTrack]?.track?.artists[0]?.name}
+                trackName={truncateText(
+                    playlistData[currentTrack]?.track?.name,
+                    20,
+                    "..."
+                )}
+                artistName={truncateText(
+                    playlistData[currentTrack]?.track?.artists[0]?.name,
+                    20,
+                    "..."
+                )}
             />
         </div>
 
