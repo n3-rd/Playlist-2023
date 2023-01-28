@@ -19,9 +19,11 @@
   "dependencies": {
     "circletype": "^2.3.0",
     "colorthief": "^2.3.2",
+    "gsap": "^3.11.4",
     "howler": "^2.2.3",
     "node-sass": "^8.0.0",
     "sass": "^1.57.1",
+    "splitting": "^1.0.6",
     "textfit": "^2.4.0"
   }
 }

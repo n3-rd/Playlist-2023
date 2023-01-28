@@ -5,10 +5,12 @@ specifiers:
   autoprefixer: ^10.4.13
   circletype: ^2.3.0
   colorthief: ^2.3.2
+  gsap: ^3.11.4
   howler: ^2.2.3
   node-sass: ^8.0.0
   postcss: ^8.4.21
   sass: ^1.57.1
+  splitting: ^1.0.6
   svelte: ^3.54.0
   tailwindcss: ^3.2.4
   textfit: ^2.4.0
@@ -17,9 +19,11 @@ specifiers:
 dependencies:
   circletype: 2.3.0
   colorthief: 2.3.2
+  gsap: 3.11.4
   howler: 2.2.3
   node-sass: 8.0.0
   sass: 1.57.1
+  splitting: 1.0.6
   textfit: 2.4.0
 
 devDependencies:
@@ -1110,6 +1114,10 @@ packages:
 
   /graceful-fs/4.2.10:
     resolution: {integrity: sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==}
+    dev: false
+
+  /gsap/3.11.4:
+    resolution: {integrity: sha512-McHhEguHyExMMnjqKA8G+7TvxmlKQGMbjgwAilnFe1e4id7V/tFveRQ2YMZhTYu0oxHGWvbPltdVYQOu3z1SCA==}
     dev: false
 
   /har-schema/2.0.0:
@@ -2252,6 +2260,10 @@ packages:
 
   /spdx-license-ids/3.0.12:
     resolution: {integrity: sha512-rr+VVSXtRhO4OHbXUiAF7xW3Bo9DuuF6C5jH+q/x15j2jniycgKbxU09Hr0WqlSLUs4i4ltHGXqTe7VHclYWyA==}
+    dev: false
+
+  /splitting/1.0.6:
+    resolution: {integrity: sha512-2hYicS/hTy1MgjTi4ST6B298uoLSx854VfTf0FeMmCeE6OiZjEixTOGPLqnNzSaM/y3jwoEYj5pmDzYFwRInPw==}
     dev: false
 
   /sshpk/1.17.0:

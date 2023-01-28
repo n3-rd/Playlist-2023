@@ -2,4 +2,6 @@
   import MainScreen from "./lib/MainScreen.svelte";
 </script>
 
-<MainScreen />
+<div class="main-screen z-[777]">
+  <MainScreen />
+</div>

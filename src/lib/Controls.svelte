@@ -1,4 +1,6 @@
 <script>
+    // @ts-nocheck
+
     export let controlsColorButton;
     export let songToPlay;
     export let playNextTrack;
@@ -20,19 +22,22 @@
                 console.log("Finished!");
             },
         });
+        // @ts-ignore
         sound.play();
     };
 </script>
 
-<button on:click={playPreviousTrack}>
-    <PreviousButton fill={controlsColorButton} />
-</button>
-<button on:click={playSound(songToPlay)}>
-    <PlayButton fill={controlsColorButton} />
-</button>
-<button on:click={stopSoundButton}>
-    <StopButton fill={controlsColorButton} />
-</button>
-<button on:click={playNextTrack}>
-    <NextButton fill={controlsColorButton} />
-</button>
+<div class="z-[99999]">
+    <button on:click={playPreviousTrack}>
+        <PreviousButton fill={controlsColorButton} />
+    </button>
+    <button on:click={playSound(songToPlay)}>
+        <PlayButton fill={controlsColorButton} />
+    </button>
+    <button on:click={stopSoundButton}>
+        <StopButton fill={controlsColorButton} />
+    </button>
+    <button on:click={playNextTrack}>
+        <NextButton fill={controlsColorButton} />
+    </button>
+</div>

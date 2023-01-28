@@ -4,10 +4,12 @@
     import Controls from "./Controls.svelte";
     import ColorThief from "colorthief";
     import { Howl, Howler } from "howler";
+    import Preloader from "./Preloader.svelte";
     let mainScreen;
     let playlistData = [];
     let currentTrack = 0;
     let controlsColor = "#fff";
+    let loaded = false;
     const fetchPlayList = async () => {
         try {
             const response = await fetch(
@@ -75,35 +77,44 @@
         Howler.stop();
     };
     onMount(async () => {
-        await fetchPlayList();
+        await fetchPlayList().then(() => {
+            loaded = true;
+            chnageBackground(
+                playlistData[currentTrack]?.track?.album?.images[0]?.url
+            );
+        });
         console.log("Hello from Svelte!");
-
-        chnageBackground(
-            playlistData[currentTrack]?.track?.album?.images[0]?.url
-        );
     });
 </script>
 
-<div
-    class="h-screen w-screen flex justify-center items-center overflow-x-hidden bg-[#3E628E] transition duration-500 linear"
-    bind:this={mainScreen}
->
-    <div class="phone-frame z-[999] " style="color: {controlsColor}">
-        <PhoneFrame
-            phoneImage={playlistData[currentTrack]?.track?.album?.images[0]
-                ?.url}
-            trackName={playlistData[currentTrack]?.track?.name}
-            artistName={playlistData[currentTrack]?.track?.artists[0]?.name}
-        />
-    </div>
+{#if loaded}
+    <div
+        class="h-screen w-screen flex justify-center items-center overflow-x-hidden bg-[#3E628E] transition duration-500 linear"
+        bind:this={mainScreen}
+    >
+        <div class="phone-frame z-[777]" style="color: {controlsColor}">
+            <PhoneFrame
+                phoneImage={playlistData[currentTrack]?.track?.album?.images[0]
+                    ?.url}
+                trackName={playlistData[currentTrack]?.track?.name}
+                artistName={playlistData[currentTrack]?.track?.artists[0]?.name}
+            />
+        </div>
 
-    <div class="absolute bottom-8 right-8 flex justify-between items-center">
-        <Controls
-            playPreviousTrack={previousTrack}
-            songToPlay={playlistData[currentTrack]?.track.preview_url}
-            stopSoundButton={stopSound}
-            playNextTrack={nextTrack}
-            controlsColorButton={controlsColor}
-        />
+        <div
+            class="absolute bottom-8 right-8 flex justify-between items-center z-[777]"
+        >
+            <Controls
+                playPreviousTrack={previousTrack}
+                songToPlay={playlistData[currentTrack]?.track.preview_url}
+                stopSoundButton={stopSound}
+                playNextTrack={nextTrack}
+                controlsColorButton={controlsColor}
+            />
+        </div>
     </div>
-</div>
+{:else}
+    <div class="preloader z-[999] fixed h-screen w-screen">
+        <Preloader />
+    </div>
+{/if}
