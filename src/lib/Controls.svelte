@@ -31,9 +31,15 @@
     <button on:click={playPreviousTrack}>
         <PreviousButton fill={controlsColorButton} />
     </button>
-    <button on:click={playSound(songToPlay)}>
-        <PlayButton fill={controlsColorButton} />
-    </button>
+    {#if songToPlay}
+        <button on:click={playSound(songToPlay)}>
+            <PlayButton fill={controlsColorButton} />
+        </button>
+    {:else}
+        <button disabled class="opacity-25">
+            <PlayButton fill={controlsColorButton} />
+        </button>
+    {/if}
     <button on:click={stopSoundButton}>
         <StopButton fill={controlsColorButton} />
     </button>
