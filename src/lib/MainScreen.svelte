@@ -2,12 +2,8 @@
     import { onMount } from "svelte";
     import PhoneFrame from "./PhoneFrame.svelte";
     import Controls from "./Controls.svelte";
-    import CircleType from "circletype";
     import ColorThief from "colorthief";
     import { Howl, Howler } from "howler";
-    import textfit from "textfit";
-
-    let circleText;
     let mainScreen;
     let playlistData = [];
     let currentTrack = 0;
@@ -25,22 +21,12 @@
             console.log(e);
         }
     };
-    const setCircleText = () => {
-        new CircleType(circleText);
-        // make the circle text grow to fit the screen
-        circleText.style.fontSize = "clamp(2rem, 6vw, 6rem)";
-    };
+
     const nextTrack = () => {
         currentTrack =
             currentTrack === playlistData.length - 1 ? 0 : currentTrack + 1;
         // update the current track name
-        circleText.innerHTML =
-            playlistData[currentTrack]?.track?.name +
-            " · " +
-            playlistData[currentTrack]?.track?.artists.map(
-                (artist) => artist.name
-            );
-        setCircleText();
+
         chnageBackground(
             playlistData[currentTrack]?.track?.album?.images[0]?.url
         );
@@ -48,18 +34,13 @@
     const previousTrack = () => {
         currentTrack =
             currentTrack === 0 ? playlistData.length - 1 : currentTrack - 1;
-        circleText.innerHTML =
-            playlistData[currentTrack]?.track?.name +
-            " · " +
-            playlistData[currentTrack]?.track?.artists.map(
-                (artist) => artist.name
-            );
-        setCircleText();
+
         chnageBackground(
             playlistData[currentTrack]?.track?.album?.images[0]?.url
         );
     };
     const chnageBackground = (imageUrl) => {
+        // @ts-ignore
         const colorThief = new ColorThief();
         const img = new Image();
         img.crossOrigin = "Anonymous";
@@ -86,6 +67,7 @@
                 console.log("Finished!");
             },
         });
+        // @ts-ignore
         sound.play();
     };
 
@@ -95,8 +77,7 @@
     onMount(async () => {
         await fetchPlayList();
         console.log("Hello from Svelte!");
-        textfit(circleText, { minFontSize: 70, maxFontSize: 500 });
-        setCircleText();
+
         chnageBackground(
             playlistData[currentTrack]?.track?.album?.images[0]?.url
         );
@@ -107,27 +88,13 @@
     class="h-screen w-screen flex justify-center items-center overflow-x-hidden bg-[#3E628E] transition duration-500 linear"
     bind:this={mainScreen}
 >
-    <div class="phone-frame z-[999]">
+    <div class="phone-frame z-[999] " style="color: {controlsColor}">
         <PhoneFrame
             phoneImage={playlistData[currentTrack]?.track?.album?.images[0]
                 ?.url}
             trackName={playlistData[currentTrack]?.track?.name}
-            artistName={playlistData[currentTrack]?.track?.artists.map(
-                (artist) => artist.name
-            )}
+            artistName={playlistData[currentTrack]?.track?.artists[0]?.name}
         />
-    </div>
-
-    <div
-        class="circle-text absolute serif font-black uppercase h-screen w-screen flex justify-center items-center text-center"
-        style="color: {controlsColor};"
-        bind:this={circleText}
-    >
-        {playlistData[currentTrack]?.track?.name} · {" "}
-        <!-- add all artists -->
-        {playlistData[currentTrack]?.track?.artists.map(
-            (artist) => artist.name
-        )}
     </div>
 
     <div class="absolute bottom-8 right-8 flex justify-between items-center">
@@ -140,19 +107,3 @@
         />
     </div>
 </div>
-
-<style>
-    .circle-text {
-        animation: circle-text 30s infinite;
-
-        /* font-size: clamp(2rem, 6vw, 6rem); */
-    }
-    @keyframes circle-text {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-</style>
