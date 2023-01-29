@@ -21,7 +21,7 @@
 </script>
 
 <div
-    class="h-screen w-screen z-[999] fixed bg-green-400 flex justify-center items-center"
+    class="h-screen w-screen z-[999] fixed bg-[#C2C2C2] flex justify-center items-center"
 >
     <div class="loader">
         <div
@@ -31,8 +31,8 @@
             Loading
         </div>
         <div class="loading-bar py-5">
-            <div class="w-[30vw] h-2 bg-black ">
-                <div class="bar-inner h-full w-1/6 bg-white" />
+            <div class="w-[30vw] h-2 bg-[#272727] ">
+                <div class="bar-inner h-full w-1/6 bg-[#C2C2C2]" />
             </div>
         </div>
     </div>
