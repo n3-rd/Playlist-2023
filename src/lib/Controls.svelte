@@ -23,6 +23,7 @@
             },
         });
         // @ts-ignore
+        Howler.stop();
         sound.play();
     };
 </script>
